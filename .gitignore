@@ -1,0 +1,52 @@
+# Виртуальные окружения
+venv/
+env/
+.venv/
+*/venv/
+
+# Базы данных (SQLite)
+*.sqlite3
+db.sqlite3
+
+# Медиафайлы (загруженные пользователями)
+media/
+
+# Статика после collectstatic (на продакшене её собирает сервер, не нужно в репо)
+staticfiles/
+
+# Файлы Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+
+# Кэши и временные файлы IDE
+.cache/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# IDE и редакторы
+.idea/
+*.iml
+.vscode/
+*.swp
+*.swo
+
+# Локальные конфиги и секреты
+.env
+.secrets/
+secrets.json
+local_settings.py
+
+# Логи и результаты тестов
+*.log
+logs/
+
+# macOS и Windows
+.DS_Store
+Thumbs.db
+
+# Git-артефакты
+.git/

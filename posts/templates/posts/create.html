@@ -1,0 +1,130 @@
+
+{% extends 'base.html' %}
+
+{% block styles %}
+    <style>
+    :root {
+        --bg-gradient: linear-gradient(135deg, #2e1e08 0%, #bba987 100%);
+        --border: rgba(255, 255, 255, 0.3);
+        --text-primary: #f8f9fa;
+        --accent: #948363;
+        --accent-color:#1f1911;
+        --radius: 14px;
+        --transition-speed: 0.3s;
+        --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+    
+    body{
+        margin: 0;
+        padding: 0;
+        background-color: var(--backgrount_color);
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    }
+
+
+    .conteiner_create{
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+        max-height: 420px;
+        background-color: var(--background);
+        border: 2px solid var(--color);
+        border-radius: 20px;
+        padding: 40px 35px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+        display: flex;
+        align-items: stretch;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        color: var(--color);
+        box-sizing: border-box;
+        margin: 20px;
+        height: 20000px;
+        width: 100%;
+    }
+
+    .entrance_create{
+        font-weight: 500;
+        font-size: 16px;
+        padding: 1rem 1.25rem;
+        border-radius: var(--radius);
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        position: relative;
+        overflow: hidden;
+        height: 0.5rem;
+        margin-top: 0rem;
+        text-align: center;
+    }
+
+    .entrance_create::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        transition: transform var(--transition-speed) ease;
+        transform: translateX(-100%);
+    }
+
+    .entrance_create:hover {
+        background: var(--accent);
+        color: #0f172a;
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px #110000;
+    }
+
+    form p {
+        margin: 8px 0;
+    }
+
+
+    form label {
+        display: block;
+        margin-top: 12px;
+        font-weight: 600;
+        color: var(--text-color);
+    }
+
+    form input[type="text"], form textarea {
+        width: 50%;
+        background-color: var(--accent);
+        padding: 10px;
+        border: 1px solid var(--color_hover);
+        border-radius: 4px;
+        box-sizing: border-box; 
+
+    }
+
+    .entrance_name_create{
+        font-size: 40px;
+        letter-spacing: 5px; 
+        font-weight: 900;
+    }
+
+</style>
+{% endblock %}
+
+
+
+{% block content%}
+    <div class="conteiner_create">
+
+        <h1 class="entrance_name_create">Создать запись </h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p  }} 
+            <button type="submit" class="entrance_create"> Создать</button>
+        </form>
+
+
+    </div>
+{% endblock %}
+

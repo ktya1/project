@@ -1,0 +1,97 @@
+{% extends 'base.html' %}
+
+{% block styles %}
+    <style>
+
+    :root {
+        --bg-gradient: linear-gradient(135deg, #2e1e08 0%, #bba987 100%);
+        --border: rgba(255, 255, 255, 0.3);
+        --text-primary: #f8f9fa;
+        --accent: #948363;
+        --radius: 14px;
+        --transition-speed: 0.3s;
+        --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    body{
+        margin: 0;
+        padding: 0;
+        background: var(--bg-gradient);
+        display: flex;
+        flex-direction: column;
+        width: auto;
+    }
+
+    .conteiner_profile{
+        font-family: var(--font-base);
+        max-height: 26.25rem;
+        background-color: var(--background);
+        border: 0.125rem solid var(--color);
+        border-radius: 20px;
+        padding: 1rem 2rem;
+        box-shadow: 0 0.9375rem 2.1875rem rgba(255, 255, 255, 0.2);
+        display: flex;
+        align-items: start;
+        justify-content: center;
+        text-align: center;
+        flex-direction: column;
+        color: var(--color);
+        box-sizing: border-box;
+        margin: 1.25rem;
+        width: 100%;
+    }
+    .your_name{
+        font-size: 2rem;
+    }
+    .name_register{
+        text-transform: uppercase;
+        margin-top: -10px;
+    }
+
+    .profile_photo{
+        width: 10rem;
+        height: 10rem;
+        border-radius: 1000px;
+    }
+
+    .naming{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+    }
+</style>
+{% endblock %}
+
+{% block content%}
+    <div class="conteiner_profile">
+        <div class="naming">
+            <h1 class="name_register">ПРОФИЛЬ</h1>
+            
+            <form method="post" action="{% url 'users-profile-edit' %}" enctype="multipart/form-data" id="photo-form">
+                {% csrf_token %}
+                <label for="id_photo">
+                    <img src="{{ user.photo.url }}" class="profile_photo" alt="Фото">
+                </label>
+                <input type="file" name="photo" id="id_photo" accept="image/*" hidden>
+            </form>
+
+        </div>
+        <p class="your_name">ник: {{user.username}}</p>
+        <p class="your_name">дата регистрации: {{user.date_joined}}</p>
+
+
+
+    </div>
+    
+
+<script>
+    // после выбора файла форма отправляется сама, кнопку нажимать не нужно
+    document.getElementById('id_photo').addEventListener('change', function () {
+        if (this.files.length > 0) {
+            document.getElementById('photo-form').submit();
+        }
+    });
+</script>
+{% endblock %}
+

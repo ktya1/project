@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    {% block styles %}{% endblock %}
+</head>
+
+<style>
+
+
+    :root {
+        --bg-gradient: linear-gradient(135deg, #2e1e08 0%, #bba987 100%);
+        --border: rgba(255, 255, 255, 0.3);
+        --text-primary: #f8f9fa;
+        --accent: #948363;
+        --radius: 14px;
+        --transition-speed: 0.3s;
+        --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+
+    body {
+        margin: 0;
+        font-family: var(--font-base);
+        background: var(--bg-gradient);
+        color: var(--text-primary);
+        line-height: 1.5;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+    }
+
+    header {
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: rgba(0, 0, 0, 0.4);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 1rem;
+        flex-wrap: wrap;
+    }
+
+    nav a {
+        font-weight: 500;
+        font-size: 16px;
+        padding: 0.75rem 1.25rem;
+        border-radius: var(--radius);
+        transition: var(--transition-speed) ease;
+        position: relative;
+        overflow: hidden;
+        text-decoration: none;
+        color: var(--text-primary);
+    }
+
+
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        width: 0;
+        background: var(--accent);
+        height: 2px;
+        transition: width var(--transition-speed) ease, left var(--transition-speed) ease;
+    }
+
+    /* nav a:focus {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        width: 0;
+        background: var(--accent);
+        height: 2px;
+    } */
+
+    nav a:hover::after {
+        width: 100%;
+        left: 0;
+    }
+
+    nav a:hover {
+        color: var(--accent);
+    }
+
+    nav form {
+        margin: 0;
+    }
+
+    .entrance {
+        font-weight: 500;
+        font-size: 16px;
+        padding: 0.75rem 1.25rem;
+        border-radius: var(--radius);
+        background: transparent;
+        border: 1px solid var(--border);
+        color: var(--text-primary);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .entrance::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: transparent;
+        transition: transform var(--transition-speed) ease;
+        transform: translateX(-100%);
+    }
+
+    .entrance:hover {
+        background: var(--accent);
+        color: #0f172a;
+        border-color: var(--accent);
+        transform: translateY(-2px);
+        box-shadow: 0 10px 25px #110000;
+    }
+
+
+    @media (max-width: 640px) {
+        header {
+            padding: 1rem;
+        }
+        
+        nav {
+            flex-direction: column;
+            align-items: stretch;
+        }
+        
+        nav a, .entrance {
+            text-align: center;
+            justify-content: center;
+        }
+        
+    }
+
+</style>
+<body>
+    <header>
+        <nav>
+            
+            <a href="#">о сайте</a>
+            
+            {% if user.is_authenticated  %}
+                <a href="{% url 'list-posts' %}">главная</a>
+                <a href="{% url 'create-post' %}">создать запись</a>
+                <a href="{% url 'users-profile' %}">профиль</a>
+                <form action="{% url 'users-logout' %}" method="post" style="display: inline;">
+                    {% csrf_token %}
+                    <button type="submit" class="entrance">выход</button>
+                </form>
+            
+
+
+
+            {% endif %}
+
+
+        </nav>
+
+    </header>
+
+    <main>
+        {% block content %}
+
+        {% endblock %}
+
+    </main>
+
+    <footer>
+
+    </footer>
+</body>
+</html>

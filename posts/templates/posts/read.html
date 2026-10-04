@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block content%}
+
+
+    <article>
+            <h2>
+                {{post.title}}
+            </h2>
+
+            <p>
+                {{post.text}}
+            </p>
+
+            <small>
+               автор: {{post.author}}
+            </small>
+
+            <br>
+
+            <small> 
+                пост создан: {{post.created}} || обновлен: {{post.updated}}
+            </small>
+
+            <form method="get" action="{% url 'delete-post' post_id=post.pk %}">
+                {% csrf_token %}
+                <button type="submit" style="color: red;">Удалить запись</button>
+            </form>
+
+            <form method="get" action="{% url 'update-post' post_id=post.pk %}">
+                {% csrf_token %}
+                <button type="submit" style="color: blue;">Изменить запись</button>
+            </form>
+
+            <form method="get" action="">
+                {% csrf_token %}
+                <button type="submit" style="color: blue;">Выполнить </button>
+            </form>
+            
+        </article>
+
+{% endblock %}

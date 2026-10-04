@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% block styles %}
+    <style>
+
+    :root {
+        --bg-gradient: linear-gradient(135deg, #2e1e08 0%, #bba987 100%);
+        --border: rgba(255, 255, 255, 0.3);
+        --text-primary: #f8f9fa;
+        --accent: #948363;
+        --accent-color:#1f1911;
+        --radius: 14px;
+        --transition-speed: 0.3s;
+        --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+    main{
+        margin: 0;
+        padding: 0;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        font-family: var(--font-base);
+    }
+
+    .card{
+        margin-top: 0.5rem;
+        background: var(--bg-gradient);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 0.5rem;
+        color: var(--text-primary);
+        transition: transform var(--transition-speed), box-shadow var(--transition-speed);
+        display: flex;
+        flex-direction: column;
+        height: 100%; 
+        text-decoration: none;
+        width: 90%;
+    }
+
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .name_post {
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+        flex-grow: 1;
+    }
+
+    .name_post:hover {
+        color: var(--accent);
+    }
+
+    .ul_name{
+        list-style-type: circle;
+        font-size: 18px;
+    }
+    .empty{
+        color: var(--text-primary);
+        text-decoration: none;
+        font-size: 1.3rem;
+        margin-top: 1.5rem;
+        text-align: end;
+        font-size: 30px;
+    }
+
+
+
+    </style>
+{% endblock %}
+
+{% block content %}
+
+    <h1 style="color: white; text-align: center;" >
+        
+        Заметки <br>
+        <p style="font-size: 18px;">Здесь находятся ваши заметки. В каждой из них есть три кнопки:</p>
+        <ul class="ul_name">
+          <li style="color: rgb(184, 54, 54);">удалить, если заметка вам не нужна</li>
+            <li style="color: rgb(161, 181, 64);">изменить, если хотите что-то поменять</li>
+            <li style="color: gray;">выполнить, если сделали задачу, но удалять ее не нужно</li>      
+        </ul>
+        
+    </h1>
+    <main>
+        {% for post in posts %}
+            <a href="{% url 'read-post' post.id %}" class="card">
+                <article class="conteiner_list">
+                    <h2>
+                       <p class="title">{{post.title}}</p>
+                    </h2>
+                    <div class="s"></div>   
+                </article>
+            </a>
+        {% empty %}
+            <h1 class="empty">Постов пока нет</h1>
+        {% endfor %}
+    </main>
+   
+{% endblock %}

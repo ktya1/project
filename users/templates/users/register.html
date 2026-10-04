@@ -1,0 +1,198 @@
+
+
+{% extends 'base.html' %}
+
+{% block styles %}
+    <style>
+    :root {
+        --bg-gradient: linear-gradient(135deg, #2e1e08 0%, #bba987 100%);
+        --border: rgba(255, 255, 255, 0.3);
+        --text-primary: #f8f9fa;
+        --accent: #948363;
+        --radius: 14px;
+        --transition-speed: 0.3s;
+        --font-base: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
+
+
+    .conteiner_register {
+        width: 100%;
+        max-width: 420px;
+        margin: 2rem auto;
+        padding: 2.5rem 2rem 2rem;
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid rgba(255, 255, 255, 0.2);
+        border-radius: var(--radius);
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        backdrop-filter: var(--glass-backdrop);
+        -webkit-backdrop-filter: var(--glass-backdrop);
+        text-align: center;
+        position: relative;
+        overflow: hidden;
+        animation: apierens 0.5s ease-out;
+    }
+
+    @keyframes apierens {
+        0% {
+            opacity: 0;
+            transform: scale(0.95) translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: scale(1) translateY(0);
+        }
+    }
+
+
+    .entrance_name_register {
+        font-size: 1.5rem;
+        font-weight: 600;
+        margin: 0 0 1.5rem;
+        color: var(--text-primary);
+        letter-spacing: 0.5px;
+        position: relative;
+    }
+
+    .entrance_name_register::after {
+        content: '';
+        display: block;
+        width: 60px;
+        height: 2px;
+        background: var(--accent);
+        margin: 0.75rem auto 0;
+        border-radius: 9999px;
+    }
+
+
+    .conteiner_register form {
+        display: flex;
+        flex-direction: column;
+        gap: 1.25rem;
+    }
+
+
+    .conteiner_register input,
+    .conteiner_register textarea,
+    .conteiner_register select {
+        width: 100%;
+        padding: 1rem 1.25rem;
+        font-family: var(--font-base);
+        font-size: 1rem;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: var(--radius);
+        color: var(--text-primary);
+        transition: all var(--transition-speed) ease;
+    }
+
+
+
+
+    .conteiner_register input:focus,
+    .conteiner_register textarea:focus,
+    .conteiner_register select:focus {
+        outline: none;
+        border-color: var(--accent);
+        background: rgba(255, 255, 255, 0.15);
+    }
+
+
+
+    .entrance_register {
+        font-family: var(--font-base);
+        font-weight: 600;
+        font-size: 1.05rem;
+        padding: 1.1rem;
+        margin-top: 0.5rem;
+        background: linear-gradient(135deg, var(--accent), #2e1e08 );
+        color: var(--text-primary);
+        border: none;
+        border-radius: var(--radius);
+        cursor: pointer;
+        transition: all var(--transition-speed) ease;
+        position: relative;
+        overflow: hidden;
+        transform: translateY(0);
+    }
+
+
+
+    .entrance_register:hover::before {
+        left: 100%;
+    }
+
+    .entrance_register:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 15px 35px var(--accent);
+    }
+
+    .entrance_register:active {
+        transform: translateY(0);
+    }
+
+    .conteiner_register p {
+        margin: 1.5rem 0 0;
+        font-size: 0.95rem;
+        color: var(--text-muted);
+    }
+
+    .conteiner_register a {
+        color: var(--text-primary);
+        font-weight: 500;
+        transition: color var(--transition-speed) ease;
+        position: relative;
+    }
+
+    .conteiner_register a::after {
+        content: '';
+        position: absolute;
+        bottom: -2px;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: right;
+        transition: transform var(--transition-speed) ease;
+    }
+
+
+
+
+    @media (max-width: 480px) {
+        .conteiner_register {
+            padding: 2rem 1.5rem;
+            margin: 1rem;
+        }
+        
+        .entrance_name_register {
+            font-size: 1.3rem;
+        }
+    }
+
+</style>
+{% endblock %}
+
+
+
+{% block content%}
+    <div class="conteiner_register">
+
+        <h1 class="entrance_name_register">РЕГИСТРАЦИЯ </h1>
+        <form action="" method="post">
+            {% csrf_token %}
+            {{ form.as_p  }} 
+            <button type="submit" class="entrance_register"> зарегестрироваться</button>
+
+             <p>есть аккаунт? <a href="{% url 'users-login' %}">вход</a></p>
+        </form>
+
+
+
+        {% if form.errors %}
+            <p style="color: red;">неверное имя пользователя или пароль</p>
+
+        {% endif %}
+
+    </div>
+{% endblock %}
