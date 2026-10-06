@@ -1,0 +1,36 @@
+#scr - исходный
+from pathlib import Path
+
+from fastapi.staticfiles import StaticFiles
+import uvicorn
+from fastapi import FastAPI
+from posts.routers  import router as post_api_router
+from posts.views import router as post_page_router
+from feedback.router import router as feedback_router
+from feedback.views import router as feedback_page_router
+from database import Base, engine
+
+
+BASE_DIR = Path( __file__).resolve().parents[1] #корень приложения 
+STATIC_DIR = BASE_DIR / 'static'
+
+Base.metadata.create_all(bind=engine)
+
+app = FastAPI(
+    title= 'Блог'
+)
+
+app.include_router(post_api_router)
+app.include_router(post_page_router)
+app.include_router(feedback_page_router)
+app.include_router(feedback_router)
+
+
+if __name__ == '__main__':
+    uvicorn.run(
+        app = 'main:app',
+        host = '127.0.0.1',
+        port = 8080,
+        reload = True
+    )
+

@@ -1,0 +1,88 @@
+
+
+{% block links %}
+<style>
+
+    .thank{
+        width: 100%;
+        max-width: 600px;
+        margin: 40px auto;
+        padding: 50px 30px;
+        background-color: #faf7f2;
+        border: 1px solid #382a21;
+        border-radius: 20px;
+        box-shadow: 0 10px 30px rgba(56, 42, 33, 0.08);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        box-sizing: border-box;
+    }
+
+
+    .icon {
+        font-size: 2.8rem;
+        color: #c9a876;
+        line-height: 1;
+    }
+
+
+    .title {
+        color: #382a21;
+        font-size: 1.6rem;
+        font-weight: 600;
+        line-height: 1.4;
+        letter-spacing: 0.3px;
+        margin: 0;
+    }
+
+
+
+
+    .home{
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 11px 22px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        background-color: transparent;
+        color: #382a21;
+        border: 2px solid #c9a876;
+        width: 50%;
+    }
+
+    .home:hover {
+        background-color: #c9a876;
+    }
+
+    @media(max-width: 600px) {
+        .thank-you-card {
+            padding: 35px 20px;
+            margin: 20px auto;
+        }
+
+        .thank-you-title {
+            font-size: 1.35rem;
+        }
+
+        .home-link {
+            width: 100%;
+            box-sizing: border-box;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="thank">
+    <div class="icon">🌸</div>
+    <h2 class="title">Спасибо за ваш отзыв, мы обязательно прислушаемся!!</h2>
+    
+    <a href="/posts" class="home">Вернуться на главную страницу</a>
+</div>
+{% endblock %}

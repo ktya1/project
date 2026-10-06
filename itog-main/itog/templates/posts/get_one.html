@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+
+{% block title %} {{ post.title }} {% endblock %}
+{% block links %} 
+<style>
+    .post_card{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .but{
+        display: flex;
+    }
+    .create{
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 11px 22px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        background-color: transparent;
+        color: #382a21;
+        border: 2px solid #c9a876;
+        width: 50%;
+        
+    }
+
+    .del{
+        text-decoration: none;
+        font-size: 0.95rem;
+        font-weight: 600;
+        padding: 11px 22px;
+        border-radius: 10px;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s ease;
+        background-color: transparent;
+        color: #382a21;
+        border: 2px solid #c9a876;
+        background-color: transparent;
+        color: #8a3b3b;
+        border: 2px solid rgba(138, 59, 59, 0.35);
+        margin-left: auto;
+        width: 100%;
+    }
+
+    .dele{
+        width: 50%;
+    }
+
+    .del:hover{
+            background-color: #8a3b3b;
+            color: #ffffff;
+            border-color: #8a3b3b;
+        }
+
+    .create:hover{
+        background-color: #c9a876;
+    }
+
+
+</style>
+{% endblock %}
+
+{% block content %}
+
+<div class="post_detail_container">
+    <article class="post_card">
+
+        <div class="post_header">
+            <h1 class="post_title">{{ post.title }}</h1>
+        </div>
+        <div class="post_body">
+            <p class="post_content">Краткое описание: {{ post.content }}</p>
+        </div>
+        <div class="post_body">
+            <p class="post_content">Полное описание: {{ post.all }}</p>
+        </div>
+
+
+        <div class="but">
+             <a href="/posts/{{post.id}}/patch" class="create">изменить данные </a>
+             <form action="/posts/{{post.id}}" method="POST" class="dele"><button class="del">удалить</button></form>
+            
+        </div>
+       
+
+
+    </article>
+</div>
+{% endblock %}
